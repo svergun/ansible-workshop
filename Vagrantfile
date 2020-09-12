@@ -19,21 +19,6 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define "control", primary: true do |control|
-    control.vm.box = "centos/7"
-    control.vm.hostname = "control.example.com"
-    control.vm.network "forwarded_port", guest: 80, host: 8080
-    control.vm.network "private_network", ip: "192.168.56.100"
-    control.vm.synced_folder ".", "/vagrant"
-    control.vm.provision "hosts", type: "shell", inline: $hostsfile_update
-    control.vm.provision "package", type: "shell", inline: $control_update
-    control.vm.provision "user", type: "shell", privileged: false, inline: $control_user_configure
-    control.vm.provider "virtualbox" do |vb|
-      vb.memory = 2048
-      vb.cpus = 1
-    end
-  end
-
   config.vm.define "node1" do |node1|
     node1.vm.box = "centos/7"
     node1.vm.hostname = "node1.example.com"
@@ -52,6 +37,21 @@ Vagrant.configure("2") do |config|
     node2.vm.provision "shell", inline: $hostsfile_update
     node2.vm.provider "virtualbox" do |vb|
       vb.memory = 1024
+      vb.cpus = 1
+    end
+  end
+
+  config.vm.define "control", primary: true do |control|
+    control.vm.box = "centos/7"
+    control.vm.hostname = "control.example.com"
+    control.vm.network "forwarded_port", guest: 80, host: 8080
+    control.vm.network "private_network", ip: "192.168.56.100"
+    control.vm.synced_folder ".", "/vagrant"
+    control.vm.provision "hosts", type: "shell", inline: $hostsfile_update
+    control.vm.provision "package", type: "shell", inline: $control_update
+    control.vm.provision "user", type: "shell", privileged: false, inline: $control_user_configure
+    control.vm.provider "virtualbox" do |vb|
+      vb.memory = 2048
       vb.cpus = 1
     end
   end
