@@ -6,7 +6,11 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 SCRIPT
 
 $control_update = <<-'SCRIPT'
-yum -y install bind-utils lsof mc net-tools nmap-ncat python3-pip tar telnet vim wget zip sshpass
+yum -y install epel-release git bind-utils lsof libselinux-python mc net-tools nmap-ncat python3-pip tar telnet vim wget zip sshpass
+SCRIPT
+
+$node_update = <<-'SCRIPT'
+yum -y install epel-release libselinux-python python3-pip tar vim zip
 SCRIPT
 
 $control_user_configure = <<-'SCRIPT'
@@ -24,6 +28,7 @@ Vagrant.configure("2") do |config|
     node1.vm.hostname = "node1.example.com"
     node1.vm.network "private_network", ip: "192.168.56.101"
     node1.vm.provision "shell", inline: $hostsfile_update
+    node1.vm.provision "package", type: "shell", inline: $node_update
     node1.vm.provider "virtualbox" do |vb|
       vb.memory = 1024
       vb.cpus = 1
@@ -31,10 +36,11 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "node2" do |node2|
-    node2.vm.box = "ubuntu/focal64"
+    node2.vm.box = "centos/7"
     node2.vm.hostname = "node2.example.com"
     node2.vm.network "private_network", ip: "192.168.56.102"
     node2.vm.provision "shell", inline: $hostsfile_update
+    node2.vm.provision "package", type: "shell", inline: $node_update
     node2.vm.provider "virtualbox" do |vb|
       vb.memory = 1024
       vb.cpus = 1
@@ -44,7 +50,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "control", primary: true do |control|
     control.vm.box = "centos/7"
     control.vm.hostname = "control.example.com"
-    control.vm.network "forwarded_port", guest: 80, host: 8080
     control.vm.network "private_network", ip: "192.168.56.100"
     control.vm.synced_folder ".", "/vagrant"
     control.vm.provision "hosts", type: "shell", inline: $hostsfile_update
