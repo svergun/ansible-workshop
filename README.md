@@ -24,7 +24,7 @@ Ansible Workshop
     * Download - https://www.vagrantup.com/downloads.html
     * Install - https://www.vagrantup.com/docs/installation
 
-### <a name='BuildVirtualMachines'></a>Build Virtual Machines
+  ### <a name='BuildVirtualMachines'></a>Build Virtual Machines
 
 Launch MacOS/Linux Terminal or GitBash on Windows machine.
 
