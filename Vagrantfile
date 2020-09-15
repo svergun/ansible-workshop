@@ -6,7 +6,7 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 SCRIPT
 
 $control_update = <<-'SCRIPT'
-yum -y install epel-release git bind-utils lsof libselinux-python mc net-tools nmap-ncat python3-pip tar telnet vim wget zip sshpass
+yum -y install epel-release git bind-utils lsof libselinux-python mc net-tools nmap-ncat python3-pip tar telnet tree vim wget zip sshpass
 SCRIPT
 
 $node_update = <<-'SCRIPT'
