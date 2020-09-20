@@ -1,0 +1,9 @@
+---
+
+- name: Disable SELinux
+  selinux:
+    policy: targeted
+    state: permissive
+  when: common_selinux_disable|bool
+  notify: 
+    - reboot

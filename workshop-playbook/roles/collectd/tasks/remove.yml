@@ -1,0 +1,27 @@
+---
+
+- name: Set Fact
+  set_fact:
+    service_action: "removed"
+
+- name: Stop Collectd
+  service:
+    state: stopped
+    name: "collectd"
+    enabled: no
+
+- name: Remove Collectd
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ collectd_additional_plugin_list }}"
+    - "collectd"
+  notify:
+    - notify slack
+
+
+- name: Clear Collectd Config(s)
+  file:
+    path: "/etc/collectd.d/"
+    state: absent

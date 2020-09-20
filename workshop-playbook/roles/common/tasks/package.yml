@@ -1,0 +1,8 @@
+---
+
+- name: Install Required Package(s)
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "{{ common_package_list }}"

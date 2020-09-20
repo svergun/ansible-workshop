@@ -1,0 +1,5 @@
+---
+
+- include_tasks: package.yml
+- include_tasks: shell-profile.yml
+- include_tasks: selinux.yml

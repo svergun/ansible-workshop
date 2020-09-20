@@ -1,0 +1,11 @@
+{% if  collectd_plugin_list|length > 0 %}
+{% for plugin in collectd_plugin_list %}
+LoadPlugin {{ plugin }}
+{% endfor %}
+{% endif %}
+
+LoadPlugin write_prometheus
+
+<Plugin write_prometheus>
+  Port "{{ collectd_prometheus_port }}"
+</Plugin>

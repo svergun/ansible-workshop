@@ -1,0 +1,24 @@
+---
+
+- name: HELLO WORLD PLAY
+  hosts: localhost
+
+  tasks:
+
+  - name: Massage About My Group
+    debug:
+      msg: "Hello World. My groups is the best !!!"
+
+  - name: Shell Taks
+    shell: "echo Hello World!"
+
+- name: PLAY FACTS
+  hosts: dc
+
+  tasks:
+
+  - name: Debug Ansible Fact(s)
+    debug:
+    msg:
+        - "OS Distributive is {{ ansible_distribution }}"
+        - "{{ ansible_fqdn }} has IPv4 address {{ ansible_default_ipv4.address }}"

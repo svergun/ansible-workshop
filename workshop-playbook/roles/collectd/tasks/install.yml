@@ -1,0 +1,32 @@
+---
+
+- name: Set Fact
+  set_fact:
+    service_action: "installed or restarted"
+
+- name: Install Collectd
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - "collectd"
+    - "{{ collectd_additional_plugin_list }}"
+  notify:
+    - restart collectd
+    - notify slack
+  
+- name: Setup Config
+  template:
+    src: collectd-prometheus.conf.j2
+    dest: /etc/collectd.d/prometheus.conf
+    mode: 0644
+  notify:
+    - restart collectd
+    - notify slack
+
+- name: Start Collectd
+  service:
+    state: started
+    name: "collectd"
+    enabled: yes
+    daemon_reload: yes

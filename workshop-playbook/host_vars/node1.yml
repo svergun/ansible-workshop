@@ -1,0 +1,4 @@
+---
+
+common_selinux_disable: true
+collectd_prometheus_port: 9920

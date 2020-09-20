@@ -1,0 +1,6 @@
+---
+
+collectd_additional_plugin_list: []
+collectd_prometheus_port: 9103
+collectd_plugin_list: []
+collectd_remove: false

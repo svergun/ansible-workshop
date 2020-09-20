@@ -1,0 +1,15 @@
+---
+
+collectd_additional_plugin_list:
+  - collectd-write_prometheus
+
+collectd_plugin_list:
+  - df
+  - disk
+  - processes
+  - protocols
+  - swap
+  - tcpconns
+  - uptime
+  - users
+  - vmem

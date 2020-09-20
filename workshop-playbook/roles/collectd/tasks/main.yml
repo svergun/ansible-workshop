@@ -1,0 +1,7 @@
+---
+
+- include_tasks: install.yml
+  when: not collectd_remove|bool
+
+- include_tasks: remove.yml
+  when: collectd_remove|bool

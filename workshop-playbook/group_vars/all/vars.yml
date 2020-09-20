@@ -1,0 +1,15 @@
+---
+
+common_package_list:
+  - curl
+  - lsof
+  - mc
+  - nano
+  - tar
+  - unzip
+  - vim
+  - zip
+
+slack_api_url: "https://hooks.slack.com/services/{{ slack_token }}"
+slack_channel: "ansible-workshop"
+slack_username: "Workshop"

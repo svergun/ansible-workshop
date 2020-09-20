@@ -1,0 +1,13 @@
+---
+
+- name: restart collectd
+  service:
+    name: "collectd"
+    state: restarted
+
+- name: notify slack
+  slack:
+    token: "{{ slack_token }}"
+    msg: "Collectd service has been {{ service_action }} on the instance {{ ansible_fqdn }}"
+    channel: "{{ slack_channel }}"
+    username: "{{ slack_username }}"

@@ -1,0 +1,7 @@
+---
+
+- name: Set Default Shell Profile
+  template:
+    src: "shell-profile.sh.j2"
+    dest: "/etc/profile.d/shell_profile.sh"
+    mode: 0644

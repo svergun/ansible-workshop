@@ -1,0 +1,23 @@
+---
+
+## PLAY 1
+#######################
+- name: MANAGE CONTROL
+  hosts: control
+  connection: local
+  become: yes
+  gather_facts: no
+
+  roles:
+    - common
+
+## PLAY 2
+#######################
+- name: MANAGE NODES
+  hosts: managed_nodes
+  become: yes
+
+  roles:
+    - common
+    - collectd
+ 
