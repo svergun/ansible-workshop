@@ -1,0 +1,26 @@
+---
+
+- name: ANSIBLE COLOR OUTPUT
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    skip_task: False
+
+  tasks:
+
+  - name: Green Task
+    debug:
+      msg: "Green means there were no changes."
+
+  - name: Yellow Taks
+    shell: "echo Yellow means something was changed."
+
+  - name: Skip Task
+    debug:
+      msg: "Skipped Task"
+    when: skip_task
+
+  - name: Red Taks
+    fail:
+      msg: "Red means something was failed or undefined."
