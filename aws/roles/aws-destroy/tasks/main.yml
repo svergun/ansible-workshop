@@ -1,0 +1,68 @@
+---
+
+- name: Destroy AWS Workshop
+  block:
+
+    - name: Gather VPC Info
+      ec2_vpc_net_info:
+        filters:
+          "tag:Name": "{{ aws_vpc_name }}"
+      register: aws_vpc_info
+
+    - name: Gather EC2 Instance Info
+      ec2_instance_info:
+        filters:
+          "tag:Name": "{{ aws_ec2_instance_tags.Name }}"
+          instance-state-name: [ "running"]
+      register: aws_ec2_instance_info
+
+    - name: Terminate EC2 Instance
+      ec2:
+        state: 'absent'
+        instance_ids: '{{ item.instance_id }}'
+        wait: yes
+      loop: "{{ aws_ec2_instance_info.instances }}"
+      loop_control:
+        label: "{{ item.instance_id }}"
+
+    - name: Gather EC2 SG Info
+      ec2_group_info:
+        filters:
+          vpc-id: "{{ aws_vpc_info.vpcs.0.id }}"
+      register: aws_ec2_sg_info
+
+    - name: Exclude EC2 Default SG
+      set_fact:
+        aws_ec2_sg_list: "{{ aws_ec2_sg_info.security_groups | selectattr('group_name', 'match', 'default-.*') }}"
+
+    - name: Remove an EC2 SG
+      ec2_group:
+        group_id: "{{ item.group_id }}"
+        state: absent
+      loop: "{{ aws_ec2_sg_list }}"
+      loop_control:
+        label: "{{ item.group_id }}"
+
+    - name: Remove an EC2 Key Pair
+      ec2_key:
+        name: "{{ aws_ec2_key_name }}"
+        state: absent
+
+    - name: Remove a VPC Internet Gateway
+      ec2_vpc_igw:
+        vpc_id: "{{ aws_vpc_info.vpcs.0.id }}"
+        state: absent
+
+    - name: Remove a VPC Subnet
+      ec2_vpc_subnet:
+        state: absent
+        vpc_id: "{{ aws_vpc_info.vpcs.0.id }}"
+        cidr: "{{ aws_vpc_cidr_block }}"
+
+    - name: Remove a VPC
+      ec2_vpc_net:
+        name: "{{ aws_vpc_name }}"
+        cidr_block: "{{ aws_vpc_cidr_block }}"
+        state: absent
+
+  when: aws_workshop_destroy|bool

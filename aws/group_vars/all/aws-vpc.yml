@@ -1,0 +1,6 @@
+aws_vpc_name: vpc-ansible-workshop
+aws_vpc_cidr_block: 10.0.1.0/24
+aws_vpc_subnet_tags:
+  Name: "subnet-ansible-workshop"
+aws_vpc_igw_tags:
+  Name: "igw-ansible-workshop"

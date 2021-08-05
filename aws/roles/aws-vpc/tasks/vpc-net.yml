@@ -1,0 +1,9 @@
+---
+
+- name: Create a VPC
+  ec2_vpc_net:
+    name: "{{ aws_vpc_name }}"
+    cidr_block: "{{ aws_vpc_cidr_block }}"
+    state: present
+    tags: "{{ aws_tags_default }}"
+  register: aws_vpc_info

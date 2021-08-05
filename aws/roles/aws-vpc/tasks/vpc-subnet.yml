@@ -1,0 +1,9 @@
+---
+
+- name: Create a VPC Subnet
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ aws_vpc_info.vpc.id }}"
+    cidr: "{{ aws_vpc_cidr_block }}"
+    tags: "{{ aws_tags_default | combine( aws_vpc_subnet_tags ) }}"
+  register: vpc_subnet_info

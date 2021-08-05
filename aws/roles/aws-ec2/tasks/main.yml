@@ -1,0 +1,10 @@
+---
+
+- name: Manage EC2
+  include_tasks: "{{ item }}"
+  loop:
+    - ec2-keypair.yml
+    - ec2-ami.yml
+    - ec2-sg.yml
+    - ec2-instance.yml
+  when: not aws_workshop_destroy|bool

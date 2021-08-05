@@ -1,0 +1,43 @@
+aws_ec2_key_material: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeCpQao/wZJ8AJZSw+yZX3CDOzqBEN3gSHykAfylcO9tEcdjrTmwLF2oKjdengsSHEMe3l/HXa9uMBl+3D7r6E4brTPC4lULRnNwOJB/Eg1RxkXHr//yd1jUik2StRb2QC3a4BzTW/2m6hB4DQQXVqZHE6MgViDAyWZ6l4o8a6c5MK9ggEZhykBwFpZ22OaNbm0slzLdKRDgNwhmf9J1tnIrVAgO9ioE6I+isOcQOjd5wLBJNpgme0BzPMDb2b7z1i7GAOCmwf0u9xisELlKtnmnoQ73VL7EicrBB8bQYfgojt2igirALx6mJOoXGNZWAOVDnaEjAwCmXNyaa4zCu1"
+aws_ec2_key_name: "key-ansible-workshop"
+aws_ec2_ami_filter:
+  "architecture": "x86_64"
+  "is-public": "true"
+  "owner-alias": "amazon"
+  "name": "amzn2-ami-hvm-2.0.????????-x86_64-gp2"
+  "state": "available"
+  "virtualization-type": "hvm"
+aws_ec2_sg_default_name: "default-ansible-workshop"
+aws_ec2_sg_default_description: "Ansible Workshop Default SG"
+aws_ec2_sg_default_tags:
+  Name: "sg-default-ansible-workshop"
+aws_ec2_sg_default_rules:
+  - proto: "tcp"
+    ports:
+      - 22
+    cidr_ip:
+      - 0.0.0.0/0
+    rule_desc: "Allow SSH Connetions"
+  - proto: "tcp"
+    ports:
+      - 80
+      - 443
+    cidr_ip:
+      - 10.0.1.0/24
+    rule_desc: "Allow HTTP, HTTPS Connetions"
+aws_ec2_instance_type: "t2.micro"
+aws_ec2_instance_count: 2
+aws_ec2_instance_public_ip: yes
+aws_ec2_instance_wait: yes
+aws_ec2_instance_wait_timeout: 500
+aws_ec2_instance_tags:
+  Name: "ansible-workshop"
+aws_ec2_instance_volumes:
+  - device_name: /dev/sdb
+    volume_type: gp3
+    volume_size: 10
+    delete_on_termination: true
+  - device_name: /dev/sdc
+    volume_type: gp3
+    volume_size: 20
+    delete_on_termination: true

@@ -1,0 +1,9 @@
+---
+
+- name: Create a VPC
+  include_tasks: "{{ item }}"
+  loop:
+    - vpc-net.yml
+    - vpc-subnet.yml
+    - vpc-igw.yml
+  when: not aws_workshop_destroy|bool

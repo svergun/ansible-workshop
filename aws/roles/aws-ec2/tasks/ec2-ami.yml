@@ -1,0 +1,10 @@
+---
+
+- name: Find AMIs
+  ec2_ami_info:
+    filters: "{{ aws_ec2_ami_filter }}"
+  register: ec2_ami_info
+
+- name: Get Latest AMI Facts
+  set_fact:
+    ec2_ami_latest: "{{ ec2_ami_info.images | sort (attribute='creation_date') | last }}"

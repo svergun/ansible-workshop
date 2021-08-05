@@ -1,0 +1,16 @@
+---
+
+- name: MANAGE AWS INFRASTRUCTURE
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  environment:
+    AWS_PROFILE: "{{ aws_profile }}"
+    AWS_REGION: "{{ aws_region }}"
+
+  roles:
+    - aws-vpc
+    - aws-ec2
+    - aws-destroy

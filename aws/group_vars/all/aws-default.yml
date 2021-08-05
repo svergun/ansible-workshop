@@ -1,0 +1,8 @@
+aws_region: us-east-1
+aws_profile: sv-aws-ansible
+aws_workshop_destroy: False
+
+aws_tags_default:
+  Owner: "EPAM MsDP"
+  Email: "notify@example.com"
+  Purpose: "Ansible Workshop"
