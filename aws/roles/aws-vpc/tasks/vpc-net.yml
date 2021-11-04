@@ -1,9 +1,15 @@
 ---
 
-- name: Create a VPC
+- name: Create VPC
   ec2_vpc_net:
     name: "{{ aws_vpc_name }}"
     cidr_block: "{{ aws_vpc_cidr_block }}"
     state: present
     tags: "{{ aws_tags_default }}"
   register: aws_vpc_info
+
+- name: Gather VPC Route Table Info
+  ec2_vpc_route_table_info:
+    filters:
+      vpc-id: "{{ aws_vpc_info.vpc.id }}"
+  register: aws_vpc_route_table_info

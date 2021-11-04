@@ -25,6 +25,12 @@ aws_ec2_sg_default_rules:
     cidr_ip:
       - 10.0.1.0/24
     rule_desc: "Allow HTTP, HTTPS Connetions"
+  - proto: "icmp"
+    cidr_ip:
+      - 0.0.0.0/0
+    from_port: 8
+    to_port:  -1
+    rule_desc: "Allow ICMP"
 aws_ec2_instance_type: "t2.micro"
 aws_ec2_instance_count: 2
 aws_ec2_instance_public_ip: yes

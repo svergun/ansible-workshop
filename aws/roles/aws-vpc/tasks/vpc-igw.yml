@@ -5,3 +5,4 @@
     vpc_id: "{{ aws_vpc_info.vpc.id }}"
     state: present
     tags: "{{ aws_tags_default | combine( aws_vpc_igw_tags ) }}"
+  register: vpc_igw

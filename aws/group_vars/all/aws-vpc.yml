@@ -4,3 +4,5 @@ aws_vpc_subnet_tags:
   Name: "subnet-ansible-workshop"
 aws_vpc_igw_tags:
   Name: "igw-ansible-workshop"
+aws_vpc_route_tags:
+  Name: "route-ansible-workshop"

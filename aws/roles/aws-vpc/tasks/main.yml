@@ -6,4 +6,5 @@
     - vpc-net.yml
     - vpc-subnet.yml
     - vpc-igw.yml
+    - vpc-route.yml
   when: not aws_workshop_destroy|bool

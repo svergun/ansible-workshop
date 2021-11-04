@@ -1,0 +1,15 @@
+---
+
+- name: Set Defualt Route
+  ec2_vpc_route_table:
+    vpc_id: "{{ aws_vpc_info.vpc.id }}"
+    route_table_id: "{{ route_table_item.id }}"
+    lookup: id
+    tags: "{{ aws_tags_default | combine( aws_vpc_route_tags ) }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ vpc_igw.gateway_id }}"
+  loop: "{{ aws_vpc_route_table_info.route_tables }}"
+  loop_control:
+    label: "{{ route_table_item.id }}"
+    loop_var: route_table_item

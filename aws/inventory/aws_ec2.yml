@@ -1,0 +1,5 @@
+plugin: aws_ec2
+aws_profile: sv-aws-ansible
+regions:
+  - us-east-1
+  - us-west-2
