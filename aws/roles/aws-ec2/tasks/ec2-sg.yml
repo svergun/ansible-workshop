@@ -1,6 +1,6 @@
 ---
 
-- name: Create an EC2 Security Group
+- name: Create EC2 Security Group
   ec2_group:
     name: "{{ aws_ec2_sg_default_name }}"
     description: "{{ aws_ec2_sg_default_description }}"

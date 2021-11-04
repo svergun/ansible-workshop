@@ -35,7 +35,7 @@
       set_fact:
         aws_ec2_sg_list: "{{ aws_ec2_sg_info.security_groups | selectattr('group_name', 'match', 'default-.*') }}"
 
-    - name: Remove an EC2 SG
+    - name: Remove EC2 SG
       ec2_group:
         group_id: "{{ item.group_id }}"
         state: absent
@@ -43,23 +43,23 @@
       loop_control:
         label: "{{ item.group_id }}"
 
-    - name: Remove an EC2 Key Pair
+    - name: Remove EC2 Key Pair
       ec2_key:
         name: "{{ aws_ec2_key_name }}"
         state: absent
 
-    - name: Remove a VPC Internet Gateway
+    - name: Remove VPC Internet Gateway
       ec2_vpc_igw:
         vpc_id: "{{ aws_vpc_info.vpcs.0.id }}"
         state: absent
 
-    - name: Remove a VPC Subnet
+    - name: Remove VPC Subnet
       ec2_vpc_subnet:
         state: absent
         vpc_id: "{{ aws_vpc_info.vpcs.0.id }}"
         cidr: "{{ aws_vpc_cidr_block }}"
 
-    - name: Remove a VPC
+    - name: Remove VPC
       ec2_vpc_net:
         name: "{{ aws_vpc_name }}"
         cidr_block: "{{ aws_vpc_cidr_block }}"

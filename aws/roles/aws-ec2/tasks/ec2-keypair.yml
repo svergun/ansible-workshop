@@ -1,6 +1,6 @@
 ---
 
-- name: Create an EC2 Key Pair
+- name: Create EC2 Key Pair
   ec2_key:
     name: "{{ aws_ec2_key_name }}"
     key_material: "{{ aws_ec2_key_material }}"
