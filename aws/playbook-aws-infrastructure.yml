@@ -10,6 +10,12 @@
     AWS_PROFILE: "{{ aws_profile }}"
     AWS_REGION: "{{ aws_region }}"
 
+  pre_tasks:
+    - name: Install Python Dependencies
+      pip:
+        name:
+          - boto
+
   roles:
     - aws-vpc
     - aws-ec2

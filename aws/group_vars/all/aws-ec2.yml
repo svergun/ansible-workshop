@@ -4,7 +4,7 @@ aws_ec2_ami_filter:
   "architecture": "x86_64"
   "is-public": "true"
   "owner-alias": "amazon"
-  "name": "amzn2-ami-hvm-2.0.????????-x86_64-gp2"
+  "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2"
   "state": "available"
   "virtualization-type": "hvm"
 aws_ec2_sg_default_name: "default-ansible-workshop"
@@ -40,10 +40,12 @@ aws_ec2_instance_tags:
   Name: "ansible-workshop"
 aws_ec2_instance_volumes:
   - device_name: /dev/sdb
-    volume_type: gp3
-    volume_size: 10
-    delete_on_termination: true
+    ebs:
+      volume_type: gp3
+      volume_size: 10
+      delete_on_termination: true
   - device_name: /dev/sdc
-    volume_type: gp3
-    volume_size: 20
-    delete_on_termination: true
+    ebs:
+      volume_type: gp3
+      volume_size: 20
+      delete_on_termination: true

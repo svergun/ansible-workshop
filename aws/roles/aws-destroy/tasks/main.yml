@@ -17,8 +17,8 @@
       register: aws_ec2_instance_info
 
     - name: Terminate EC2 Instance
-      ec2:
-        state: 'absent'
+      ec2_instance:
+        state: 'terminated'
         instance_ids: '{{ item.instance_id }}'
         wait: yes
       loop: "{{ aws_ec2_instance_info.instances }}"
