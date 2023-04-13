@@ -7,7 +7,7 @@
   gather_facts: no
 
   environment:
-    AWS_PROFILE: "{{ aws_profile }}"
+    # AWS_PROFILE: "{{ aws_profile }}"
     AWS_REGION: "{{ aws_region }}"
 
   pre_tasks:
